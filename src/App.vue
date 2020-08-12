@@ -1,32 +1,24 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div id="app" class="container mt-2">
+    <div>
+      <router-link to="/" v-if="existeUsuario" class="btn btn-dark mr-2">Inicio</router-link>
+      <router-link to="/registro" v-if="!existeUsuario" class="btn btn-dark mr-2">Registro</router-link>
+      <router-link to="/acceso" v-if="!existeUsuario" class="btn btn-dark mr-2">Acceso</router-link>
+      <button @click="cerrarSesion" v-if="existeUsuario" class="btn btn-dark mr-2">Cerrar Sesion</button>
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import { mapActions, mapGetters } from "vuex";
+export default {
+  methods: {
+    ...mapActions(["cerrarSesion"]),
+  },
+  computed: {
+    ...mapGetters(["existeUsuario"]),
+  },
+};
+</script>
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
