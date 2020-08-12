@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Ruta protegida</h1>
+    <h1>Administrador de tareas:</h1>
     <router-link to="/agregar">
       <button class="btn btn-primary mb-2">Agregar</button>
     </router-link>
