@@ -2,14 +2,16 @@
   <div>
     <h1>Editar</h1>
     <form @submit.prevent="editarTarea(tarea)">
-      <input type="text" v-model="tarea.nombre" class="form-control mb-2" />
-      <button class="btn btn-warning">Editar</button>
+      <input type="text" v-model="$v.tarea.nombre.$model" class="form-control mb-2" />
+      <small class="text-danger d-block mb-2" v-if="!$v.tarea.nombre.required">Campo requerido</small>
+      <button class="btn btn-warning" :disabled="$v.tarea.$invalid">Editar</button>
     </form>
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from "vuex";
+import { required, minLength } from "vuelidate/lib/validators";
 export default {
   name: "Editar",
   data() {
@@ -25,6 +27,11 @@ export default {
   },
   computed: {
     ...mapState(["tarea"]),
+  },
+  validations: {
+    tarea: {
+      nombre: { required },
+    },
   },
 };
 </script>
